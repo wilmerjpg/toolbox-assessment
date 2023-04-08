@@ -28,6 +28,12 @@ const getFilesData = async () => {
   return filesData;
 };
 
+const getFilesList = async () => {
+  const response = await getFiles();
+  return response;
+};
+
 export default {
   getFilesData,
+  getFilesList,
 };
