@@ -1,3 +1,5 @@
+import { parse } from 'csv-parse/sync';
+
 export const handleResponseError = (res, error) => {
   const status =
     typeof error === 'object' && error !== null && 'status' in error
@@ -46,4 +48,14 @@ export const isValidRecord = (record = {}) => {
   }
 
   return true;
+};
+
+export const getValidRecordsFromCSV = (csvFile) => {
+  const records = parse(csvFile, {
+    columns: true,
+    skip_empty_lines: true,
+    relaxColumnCount: true,
+  });
+
+  return records.filter(isValidRecord);
 };
