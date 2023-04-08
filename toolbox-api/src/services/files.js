@@ -23,7 +23,15 @@ const getFilesList = async () => {
   return response;
 };
 
+const getFileDetail = async (fileName) => {
+  const file = await getFileData(fileName);
+  const records = getValidRecordsFromCSV(file);
+
+  return records;
+};
+
 export default {
   getFilesData,
   getFilesList,
+  getFileDetail,
 };

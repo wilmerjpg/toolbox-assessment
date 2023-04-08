@@ -1,10 +1,16 @@
 import filesService from '../services/files.js';
 import { handleResponseError } from '../utils.js';
 
-export const getFilesData = async (_req, res) => {
+export const getFilesData = async (req, res) => {
   try {
-    const data = await filesService.getFilesData();
-    res.json(data);
+    const { query = {} } = req;
+    if (query.fileName) {
+      const data = await filesService.getFileDetail(query.fileName);
+      res.json(data);
+    } else {
+      const data = await filesService.getFilesData();
+      res.json(data);
+    }
   } catch (error) {
     handleResponseError(res, error);
   }
